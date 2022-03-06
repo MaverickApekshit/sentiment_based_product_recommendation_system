@@ -35,6 +35,7 @@ def search():
     print("Output :", prediction)
 
     return render_template('index.html', message='We have picked 5 items that may interest you:\n ', username = user_name,results = prediction)
+
 def top_5_recommendation(user_input):
     arr = user_predicted_ratings.loc[user_input].sort_values(ascending=False)[0:20]
 
