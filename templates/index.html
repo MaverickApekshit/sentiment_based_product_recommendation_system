@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Recommendation based on sentiment</title>
+    <style>
+        .user {
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body bgcolor="#FFFFFF">
+    <div class="user">
+        <h1 style="text-align:center;">Top 5 Product Recommendations</h1>
+        <h3 style="text-align:center;">Using Sentiment Analysis with User-Based Collaborative Filtering</h3>
+
+        <!-- Main Input For Receiving Query to our ML model-->
+        <form action="{{ url_for('search')}}" method="post">
+            <label style="text-align:center;" for="username"><strong>Username:</strong></label>
+            <br />
+            <input style="color:SlateBlue;text-align:left;" type="text" name="reviews_username" placeholder="Please Enter the name" required="required" />
+            <br/><br/>
+            <p>Example: ["rebecca","george","anne"]</p>
+            <br/>
+
+            <button style="text-align:center;" type="search"><strong>Search</strong></button>
+        </form>
+
+        <br />
+        <br />
+        
+        <p style = "text-transform:capitalize;"><strong>{{ username }}</strong></p>
+        <p>{{ message }}</p>
+
+        <ul>
+            {%for i in results%}
+                <li>{{i}}</li>
+            {%endfor%}
+        </ul>
+    </div>
+</body>
+</html>
