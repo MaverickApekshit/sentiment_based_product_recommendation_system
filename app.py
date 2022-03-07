@@ -21,7 +21,7 @@ app = Flask(__name__)
 logit=pickle.load(open('pickle/logistic_model.pkl', 'rb'))
 word_vectorizer= pickle.load(open('pickle/word_vectorizer.pkl', 'rb'))
 user_predicted_ratings = pd.read_pickle("pickle/user_predicted_ratings.pkl")
-df_latest=pd.read_csv("final_data.csv")
+df_latest=pd.read_csv("dataset/final_data.csv")
 
 # Prediction page
 @app.route('/search', methods=['POST'])
