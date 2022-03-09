@@ -34,17 +34,19 @@
             <button class="btn btn-primary btn-block btn-large" type="search"><strong>Search</strong></button>
         </form>
 
-        <br />
-        <br />
-        
-        <p style = "text-transform:capitalize;"><strong>{{ username }}</strong></p>
-        <p>{{ message }}</p>
+        {%if results_page == True%}
+            <br />
+            <br />
+            
+            <p style = "text-transform:capitalize;"><strong>Hi, {{ username }}!</strong></p>
+            <p>We have picked 5 items that may interest you:</p>
 
-        <ul>
-            {%for i in results%}
-                <li>{{i}}</li>
-            {%endfor%}
-        </ul>
+            <ul>
+                {%for i in results%}
+                    <li>{{i}}</li>
+                {%endfor%}
+            </ul>
+        {%endif%}
     </div>
 </body>
 </html>
