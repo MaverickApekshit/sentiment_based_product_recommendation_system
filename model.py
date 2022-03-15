@@ -25,7 +25,7 @@ class Recommendation:
             
             b= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
             result= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
+            return result
         else:
             return None
-        
-        return result
+

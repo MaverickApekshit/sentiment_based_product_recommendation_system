@@ -27,7 +27,7 @@ def search():
     '''
     For rendering results on HTML GUI
     '''
-    user_name = str(request.form.get('reviews_username'))
+    user_name = str(request.form.get('reviews_username')).lower()
     prediction = recommend.top_5_recommendation(user_name)
 
     if(not(prediction is None)):
