@@ -18,7 +18,6 @@ app = Flask(__name__)
 # Main page
 @app.route('/', methods=['GET'])
 def index():
-    results_page = False
     return render_template('index.html')
 
 
@@ -28,11 +27,13 @@ def search():
     '''
     For rendering results on HTML GUI
     '''
-    results_page = True
-    user_name = str(request.form.get('reviews_username'))
+    user_name = str(request.form.get('reviews_username')).lower()
     prediction = recommend.top_5_recommendation(user_name)
 
-    return render_template('index.html', username=user_name, results=prediction, results_page= results_page)         
+    if(not(prediction is None)):
+        return render_template('index.html', username=user_name, results=prediction)
+    else:
+        return render_template("index.html", message="Username doesn't exists. Please enter a valid username.")
         
 
 if __name__ == '__main__':
