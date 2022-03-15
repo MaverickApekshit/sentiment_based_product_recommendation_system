@@ -11,18 +11,21 @@ class Recommendation:
         self.df_latest=pd.read_csv("dataset/final_data.csv")
 
     def top_5_recommendation(self, user_input):
-        arr = self.user_predicted_ratings.loc[user_input].sort_values(ascending=False)[0:20]
-        i= 0
-        a = {}
-        
-        for prod_name in arr.index.tolist():
-            product = prod_name
-            product_name_review_list =self.df_latest[self.df_latest['name']== product]['Reviews_Text_and_Title'].tolist()
-            features= self.word_vectorizer.transform(product_name_review_list)
-            self.logit.predict(features)
-            a[product] = self.logit.predict(features).mean()*100
-        
-        b= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
-        result= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
+        if (user_input in self.user_predicted_ratings.index):
+            arr = self.user_predicted_ratings.loc[user_input].sort_values(ascending=False)[0:20]
+            i= 0
+            a = {}
+            
+            for prod_name in arr.index.tolist():
+                product = prod_name
+                product_name_review_list =self.df_latest[self.df_latest['name']== product]['Reviews_Text_and_Title'].tolist()
+                features= self.word_vectorizer.transform(product_name_review_list)
+                self.logit.predict(features)
+                a[product] = self.logit.predict(features).mean()*100
+            
+            b= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
+            result= pd.Series(a).sort_values(ascending = False).head(5).index.tolist()
+        else:
+            return None
         
         return result

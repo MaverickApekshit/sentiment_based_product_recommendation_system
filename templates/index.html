@@ -8,7 +8,6 @@
     <title>Product Recommendation based on sentiment</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ url_for('static',filename='style.css') }}" />
 </head>
 
 <body>
@@ -40,7 +39,7 @@
                     <button class="btn btn-info btn-lg btn-block" type="search"><strong>Search</strong></button>
                 </form>
 
-                {%if results_page == True%}
+                {% if results %}
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title" style="text-transform: capitalize;">Hi, {{ username }}!</h5>
@@ -48,13 +47,17 @@
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                {%for i in results%}
+                                {% for i in results %}
                                     <li class="list-group-item">{{i}}</li>
-                                {%endfor%}
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
-                {%endif%}
+                {% endif %}
+
+                {% if message%}
+                    <div class="alert alert-danger" role="alert">{{message}}</div>
+                {% endif %}
             </div>
         </div>
     </div>
